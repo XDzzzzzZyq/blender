@@ -157,9 +157,11 @@ typedef struct BrushCurvesSculptSettings {
   float minimum_distance;
   /** How often the Density brush tries to add a new curve. */
   int density_add_attempts;
+  /** The initial radius of curve. **/
+  float curve_radius;
   /** #eBrushCurvesSculptDensityMode. */
   uint8_t density_mode;
-  char _pad[3];
+  char _pad[7];
   struct CurveMapping *curve_parameter_falloff;
 } BrushCurvesSculptSettings;
 

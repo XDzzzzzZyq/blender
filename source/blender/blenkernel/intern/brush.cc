@@ -1649,7 +1649,7 @@ void BKE_brush_init_curves_sculpt_settings(Brush *brush)
   settings->points_per_curve = 8;
   settings->minimum_length = 0.01f;
   settings->curve_length = 0.3f;
-  settings->curve_radius = 1.0f;
+  settings->curve_radius = 0.01f;
   settings->density_add_attempts = 100;
   settings->curve_parameter_falloff = BKE_curvemapping_add(1, 0.0f, 0.0f, 1.0f, 1.0f);
 }

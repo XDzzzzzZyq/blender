@@ -809,6 +809,10 @@ def brush_settings(layout, context, brush, popover=False):
             col.prop(brush.curves_sculpt_settings, "curve_length")
 
             col = layout.column()
+            #col.active = not brush.curves_sculpt_settings.interpolate_radius
+            col.prop(brush.curves_sculpt_settings, "curve_radius")
+
+            col = layout.column()
             col.active = not brush.curves_sculpt_settings.interpolate_point_count
             col.prop(brush.curves_sculpt_settings, "points_per_curve")
         elif brush.curves_sculpt_tool == 'GROW_SHRINK':

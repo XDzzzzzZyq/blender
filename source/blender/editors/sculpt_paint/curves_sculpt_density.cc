@@ -289,7 +289,7 @@ struct DensityAddOperationExecutor {
       blender::GMutableSpan radius_span = radius.span.slice(
           radius.domain == bke::AttrDomain::Point ? add_outputs.new_points_range :
                                                     add_outputs.new_curves_range);
-      radius_span.typed<float>().fill(1.0f);
+      radius_span.typed<float>().fill(brush_settings_->curve_radius);
       radius.finish();
     }
 

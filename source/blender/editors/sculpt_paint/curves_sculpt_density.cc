@@ -285,6 +285,14 @@ struct DensityAddOperationExecutor {
       selection.finish();
     }
 
+  if (bke::GSpanAttributeWriter radius = attributes.lookup_for_write_span("radius")) {
+      blender::GMutableSpan radius_span = radius.span.slice(
+          radius.domain == bke::AttrDomain::Point ? add_outputs.new_points_range :
+                                                    add_outputs.new_curves_range);
+      radius_span.typed<float>().fill(1.0f);
+      radius.finish();
+    }
+
     if (add_outputs.uv_error) {
       report_invalid_uv_map(stroke_extension.reports);
     }

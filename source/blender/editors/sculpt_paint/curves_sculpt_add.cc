@@ -208,7 +208,7 @@ struct AddOperationExecutor {
     add_inputs.interpolate_length = brush_settings_->flag &
                                     BRUSH_CURVES_SCULPT_FLAG_INTERPOLATE_LENGTH;
     add_inputs.interpolate_shape = brush_settings_->flag &
-                                   BRUSH_CURVES_SCULPT_FLAG_INTERPOLATE_SHAPE;
+                                    BRUSH_CURVES_SCULPT_FLAG_INTERPOLATE_SHAPE;
     add_inputs.interpolate_point_count = brush_settings_->flag &
                                          BRUSH_CURVES_SCULPT_FLAG_INTERPOLATE_POINT_COUNT;
     add_inputs.interpolate_resolution = curves_orig_->attributes().contains("resolution");
@@ -235,6 +235,14 @@ struct AddOperationExecutor {
                                                            add_outputs.new_points_range :
                                                            add_outputs.new_curves_range));
       selection.finish();
+    }
+
+    if (bke::GSpanAttributeWriter radius = attributes.lookup_for_write_span("radius")) {
+      blender::GMutableSpan radius_span = radius.span.slice(
+          radius.domain == bke::AttrDomain::Point ? add_outputs.new_points_range :
+                                                    add_outputs.new_curves_range);
+      radius_span.typed<float>().fill(1.0f);
+      radius.finish();
     }
 
     if (add_outputs.uv_error) {
